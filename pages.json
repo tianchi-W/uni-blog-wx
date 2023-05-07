@@ -1,0 +1,61 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+
+			"style": {
+
+				"enablePullDownRefresh": true,
+				"app-plus": {
+					"titleNView": false
+				},
+				"navigationStyle": "custom"
+
+			}
+		}, {
+			"path": "pages/my/my",
+			"style": {
+				"navigationBarTitleText": "个人中心",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/article/article",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+
+			},
+			"usingComponents": {
+				"mp-html": "/components/node/mp-html.vue"
+			}
+
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+
+
+	},
+	"uniIdRouter": {},
+	"tabBar": {
+		"backgroundColor": "#ecf0f1",
+		"fontSize": "10px",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "首页",
+				"iconPath": "static/icon/a-03icon_home.png",
+				"selectedIconPath": "static/icon/a-03icon_home.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/icon/a-01icon_account.png",
+				"selectedIconPath": "static/icon/a-01icon_account.png"
+			}
+		]
+	}
+}
