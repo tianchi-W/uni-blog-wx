@@ -13,7 +13,7 @@
 		getCurrentInstance
 	} from "vue";
 	import {
-		onReady
+		onReady,onShow
 	} from '@dcloudio/uni-app'
 	import {
 		getArticleById
@@ -31,6 +31,9 @@
 		})
 	}
 	onReady(async () => {
+		await getArticle()
+	})
+	onShow(async () => {
 		await getArticle()
 	})
 	// #endif

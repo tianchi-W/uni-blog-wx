@@ -12,9 +12,7 @@
 				<div v-for="(item,index) in list" :key="index">
 					<my-card :articleInfo='item' class="card"></my-card>
 				</div>
-
 			</div>
-
 		</section>
 	</view>
 </template>

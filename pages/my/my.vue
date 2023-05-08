@@ -10,7 +10,7 @@
 
 
 			<uni-list-item v-for="index in 4" :key=index title="列表左侧带略缩图" note="列表描述信息" showArrow
-				thumb="https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png" thumb-size="base"  rightText="默认" />
+				thumb="https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png" thumb-size="base" rightText="默认" />
 
 		</uni-list>
 
@@ -18,10 +18,20 @@
 </template>
 
 <script setup lang="ts">
+	import { onReady } from '@dcloudio/uni-app'
 	import {
 		ref
 	} from 'vue'
-	const avatar = ref < string > ('https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png')
+	onReady(() => {
+		console.log(uni.getStorageSync('token'),'token')
+		if (!uni.getStorageSync('token')) {
+			uni.navigateTo({
+				url: '/pages/login/login'
+			})
+		}
+
+	})
+	const avatar = ref<string>('https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png')
 </script>
 
 <style lang="scss">
