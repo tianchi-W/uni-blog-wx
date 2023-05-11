@@ -2,7 +2,6 @@
 	<view :style="{height:height-statusHeight-titleHeight+'px'}" class="login">
 		<button type="primary" class="loginTrue" open-type="getPhoneNumber" @getphonenumber="getUserProfile">
 			登录</button>
-		<button type="default" class="loginFalse">暂不登录</button>
 	</view>
 </template>
 
@@ -29,12 +28,10 @@
 	})
 	// #ifdef MP-WEIXIN
 	const getUserProfile = (val) => {
-		console.log(val)
 		uni.login({
 			success(res) {
 				if (res.errMsg == "login:ok") {
 					wxlogin({ code: res.code }).then(r => {
-						console.log(res.code, 'fdslfkdsl')
 						uni.setStorage({
 							key: 'token',
 							data: r.data.token,
@@ -49,7 +46,17 @@
 								console.log(val, 'phone')
 							}
 
-						});
+						})
+						uni.setStorage({
+							key:'id',
+							data:r.data._id,
+							success:()=>{
+								console.log('id已储存')
+							},
+							fail:(err)=>{
+								console.log(err)
+							}
+						})
 					})
 					// console.log(r,'r')
 				} else {

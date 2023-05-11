@@ -44,8 +44,6 @@
 		if(total.value>list.value.length){
 			getList()
 		}
-		
-		console.log(123)
 	})
 	const searchValue = ref('')
 </script>

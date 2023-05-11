@@ -37,7 +37,7 @@
 
 
 	} = toRefs(data)
-	const push=(id)=>{
+	const push = (id) => {
 		uni.navigateTo({
 			url: `/pages/article/article?id=${id}`
 		});
@@ -63,12 +63,13 @@
 <style lang="scss" scoped>
 	.my-card {
 		width: 100%;
-		.uni-body{
-			 overflow: hidden;
-			        text-overflow: ellipsis;
-			        display: -webkit-box;
-			        -webkit-line-clamp:2;
-			        -webkit-box-orient: vertical;
+
+		.uni-body {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
 		}
 
 		.card-actions {

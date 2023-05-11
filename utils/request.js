@@ -79,16 +79,9 @@ export function httpPost({
 			timeout: 6000,
 			data: params,
 			success: (res) => {
-				console.log(res.data,'fdkls')
-				// 返回的数据（不固定，看后端接口，这里是做了一个判断，如果不为true，用uni.showToast方法提示获取数据失败)
-				// if (res.data.code != 200) {
-				// 	return uni.showToast({
-				// 		title: '获取数据失败',
-				// 		icon: 'none'
-				// 	})
-
+				console.log(res.data, 'fdkls')
 				if (res.data.code !== 200) {
-					if (res.data.status == '400'||res.data.status == '401') {
+					if (res.data.status == '400' || res.data.status == '401') {
 						uni.showToast({
 							title: '登录失败',
 							icon: 'none'
@@ -102,12 +95,66 @@ export function httpPost({
 							icon: 'none'
 						})
 						uni.switchTab({
-							url:'/pages/index/index'
+							url: '/pages/index/index'
 						})
 					}
 
 				} else {
-					console.log(res,'res')
+					console.log(res, 'res')
+					resolve(res.data)
+				}
+
+			},
+			fail: (err) => {
+				reject(err)
+			}
+		});
+	})
+}
+export function httpPut({
+	url,
+	params = {}
+}) {
+
+	return new Promise((resolve, reject) => {
+		console.log(234)
+		uni.request({
+			url: baseUrl + url,
+			method: 'PUT',
+			header: {
+				'Authorization': 'bearer ' + uni.getStorageSync('token')
+			},
+			timeout: 6000,
+			data: params,
+			success: (res) => {
+				console.log(res.data, 'fdkls')
+				if (res.data.code !== 200) {
+					if (res.data.code === 11000) {
+						resolve(res.data)
+					} else {
+						if (res.data.status == '400' || res.data.status == '401') {
+							uni.showToast({
+								title: '登录失败',
+								icon: 'none'
+							})
+							uni.navigateTo({
+								url: '/pages/login/login'
+							});
+						} else {
+
+							uni.showToast({
+								title: '获取数据失败',
+								icon: 'none'
+							})
+							uni.switchTab({
+								url: '/pages/index/index'
+							})
+						}
+					}
+
+
+				} else {
+					console.log(res, 'res')
 					resolve(res.data)
 				}
 
