@@ -1,4 +1,6 @@
-const baseUrl = 'http://192.168.1.118:50'
+// const baseUrl = 'http://192.168.1.118:50'
+// const baseUrl='https://express-blog-production.up.railway.app'
+import {baseUrl} from '../config/index.js'
 // get 请求
 export function httpGet({
 	url,
@@ -117,7 +119,6 @@ export function httpPut({
 }) {
 
 	return new Promise((resolve, reject) => {
-		console.log(234)
 		uni.request({
 			url: baseUrl + url,
 			method: 'PUT',

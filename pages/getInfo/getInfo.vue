@@ -29,6 +29,7 @@
 </template>
 
 <script setup>
+	import {baseUrl} from '../../config/index.js'
 	import {
 		ref,
 		reactive,
@@ -142,7 +143,7 @@
 		} = e.detail
 
 		const uploadTask = uni.uploadFile({
-			url: 'http://192.168.1.118:50/upload/qiniu_upload',
+			url: baseUrl+'/upload/qiniu_upload',
 			filePath: avatarUrl,
 			name: 'file',
 			timeout: 60000,

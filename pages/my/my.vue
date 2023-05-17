@@ -6,13 +6,13 @@
 		</uni-card>
 	</view>
 
-	<view class="main">
+<!-- 	<view class="main">
 		<uni-list>
 			<uni-list-item v-for="index in 4" :key=index title="列表左侧带略缩图" note="列表描述信息" showArrow
 				thumb="https://web-assets.dcloud.net.cn/unidoc/zh/unicloudlogo.png" thumb-size="base" rightText="默认" />
 		</uni-list>
 
-	</view>
+	</view> -->
 </template>
 
 <script setup lang="ts">
