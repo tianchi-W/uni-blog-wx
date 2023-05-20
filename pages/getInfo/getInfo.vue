@@ -96,6 +96,7 @@
 					_id: uni.getStorageSync('id'),
 					...valiFormData
 				}).then((r) => {
+					console.log(r,'r')
 					if (r.code === 11000) {
 						uni.showToast({
 							title: r.data.keyValue
@@ -106,7 +107,7 @@
 						})
 					}
 
-				})
+				}).catch((err)=>console.log(err,'err'))
 
 			}).catch(err => {
 				console.log('err', err);
@@ -156,7 +157,7 @@
 				method: 'POST' //请求方式
 			},
 			success: (uploadFileRes) => {
-
+				console.log(uploadFileRes,'resW')
 				avatar.value = JSON.parse(uploadFileRes.data).data.url
 				console.log(JSON.parse(uploadFileRes.data).data.url, avatarUrl)
 			},

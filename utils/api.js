@@ -1,19 +1,20 @@
 import {
 	httpGet,
 	httpPost,
-	httpPut
+	httpPut,
+	httpDel
 } from "./request.js"
 
 //获取文章信息全部
 export const getArticleList = (params = {}) => {
 	return httpGet({
 		url: '/article',
-		params
+		data:params
 	})
 }
 export const getArticleById = (params = {}) => httpPost({
 	url: '/article/info',
-	params
+	data:params
 })
 
 
@@ -21,14 +22,21 @@ export const getArticleById = (params = {}) => httpPost({
 export const wxlogin = (params = {}) => {
 	return httpGet({
 		url: '/users/wxlogin',
-		params
+		data:params
 	})
 }
 export const putUserInfo = (params = {}) => httpPut({
 	url: '/users',
-	params
+	data:params
 })
 export const getUserInfo = (params = {}) => httpGet({
 	url: '/users',
-	params
+	data:params
+})
+
+
+//获取分类信息
+export const getClassifyInfo = (params = {}) => httpGet({
+	url: '/classify',
+	data:params
 })

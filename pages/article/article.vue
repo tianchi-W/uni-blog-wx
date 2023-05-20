@@ -5,6 +5,7 @@
 		</view>
 		<br>
 		<mp-html :selectable='true' :set-title='true' use-anchor :markdown='true' :content="article.content"></mp-html>
+		<!-- <image :src="article.pic" mode="aspectFit" class='image' scaleToFill width="100%"/> -->
 	</view>
 </template>
 <script setup>
@@ -13,7 +14,8 @@
 		getCurrentInstance
 	} from "vue";
 	import {
-		onReady,onShow
+		onReady,
+		onShow
 	} from '@dcloudio/uni-app'
 	import {
 		getArticleById
@@ -24,7 +26,7 @@
 	const article = ref([])
 	const getArticle = async () => {
 		return getArticleById({
-			_id: page[1].options.id
+			_id: page[1].options._id
 		}).then(r => {
 			console.log(r, 'f')
 			article.value = r.data[0]
@@ -56,7 +58,7 @@
 </script>
 
 <style lang="scss">
-	.article {
+	 .article {
 		.title {
 			color: #2c3e50;
 			font-weight: 800;
@@ -66,10 +68,14 @@
 			margin-bottom: 60upx;
 		}
 
-		background-color: $uni-bg-color;
+		background-color: $uni-bg-color-grey;
 		padding: 20upx;
 		padding-top:40upx;
 
 		.title {}
+	}
+		
+	.image{
+		max-width: 400rpx;
 	}
 </style>

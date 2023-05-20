@@ -12,6 +12,6 @@ export function formatDateTime(time) {
     minute = minute < 10 ? ('0' + minute) : minute;
     second = second < 10 ? ('0' + second) : second;
     
-    return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    return y + '-' + m + '-' + d ;
 };
 

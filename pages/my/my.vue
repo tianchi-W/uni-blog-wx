@@ -26,6 +26,7 @@
 	const userInfo = ref()
 	const getInfo = async () => {
 		let info = await getUserInfo({ _id: uni.getStorageSync('id') })
+		console.log(info,'info')
 		userInfo.value = info.data[0]
 	}
 	onReady(() => {

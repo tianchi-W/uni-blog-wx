@@ -30,8 +30,10 @@
 	const getUserProfile = (val) => {
 		uni.login({
 			success(res) {
+				console.log(res, 'val')
 				if (res.errMsg == "login:ok") {
 					wxlogin({ code: res.code }).then(r => {
+						console.log(r, 'r')
 						uni.setStorage({
 							key: 'token',
 							data: r.data.token,
@@ -41,22 +43,24 @@
 									icon: 'none'
 								})
 								uni.navigateBack({
-									delta:1
+									delta: 1
 								});
 								console.log(val, 'phone')
 							}
 
 						})
 						uni.setStorage({
-							key:'id',
-							data:r.data._id,
-							success:()=>{
+							key: 'id',
+							data: r.data._id,
+							success: () => {
 								console.log('id已储存')
 							},
-							fail:(err)=>{
+							fail: (err) => {
 								console.log(err)
 							}
 						})
+					}).catch(error => {
+						console.log(error)
 					})
 					// console.log(r,'r')
 				} else {

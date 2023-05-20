@@ -5,6 +5,9 @@
 
 			"style": {
 
+				"navigationBarTitleText": "首页",
+				"navigationStyle": "custom",
+				"onReachBottomDistance": 50,
 				"enablePullDownRefresh": true,
 				"app-plus": {
 					"titleNView": false
@@ -23,33 +26,30 @@
 			"path": "pages/article/article",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor":"#7158e2"
 
 			},
 			"usingComponents": {
 				"mp-html": "/components/node/mp-html.vue"
 			}
 
+		}, {
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/getInfo/getInfo",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "pages/login/login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/getInfo/getInfo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
