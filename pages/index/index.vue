@@ -150,8 +150,7 @@
 
 		getArticleList({ limit: size.value, skip: (current.value) * size.value }).then(r => {
 			total.value = r.data.total
-			list.value = [...r.data.article, ...list.value]
-			console.log(r, 'rff')
+			list.value = [...list.value,...r.data.article]
 		})
 	}
 	getList()
