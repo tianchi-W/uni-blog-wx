@@ -9,7 +9,6 @@ export function request(
 	data = {},
 	method
 ) {
-	console.log(data, url, 'data')
 	return new Promise((resolve, reject) => {
 		// if (method == "GET") {
 		// 	data.t = new Date().getTime();
@@ -24,15 +23,14 @@ export function request(
 			data,
 			timeout: 6000,
 			success: (res) => {
-				console.log(res, 'fdkls')
 				if (res.data.code !== 200) {
 					if (res.data.status == '400' || res.data.status == '401') {
 						uni.showToast({
-							title: '登录失败',
+							title: res.data.message,
 							icon: 'none'
 						})
-						uni.navigateTo({
-							url: '/pages/login/login'
+						uni.switchTab({
+							url: '../my/my'
 						});
 					} else {
 						uni.showToast({
@@ -45,7 +43,6 @@ export function request(
 					}
 
 				} else {
-					console.log(res, 'res')
 					resolve(res.data)
 				}
 
@@ -61,21 +58,18 @@ export function httpGet({
 	url,
 	data
 }) {
-	console.log(url, data)
 	return request(url, data, 'GET');
 }
 export function httpPost({
 	url,
 	data
 }) {
-	console.log(data,'pra')
 	return request(url, data, 'POST');
 }
 export function httpPut({
 	url,
 	data
 }) {
-	console.log(url, data)
 	return request(url, data, 'PUT');
 }
 export function httpDel(url, data = {}) {

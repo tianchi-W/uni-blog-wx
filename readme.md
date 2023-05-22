@@ -51,3 +51,18 @@ git rm -r --cached unpackage
 可在pages中查看路由信息
 ## uniapp解析markdown语法
  参见链接  [mp-html](https://jin-yufeng.gitee.io/mp-html/#/overview/quickstart 'mp-html的markdown插件')
+ 
+## tababr跳转
+```js
+const handlerTabMoreClick = () => {
+		uni.switchTab({
+			url: '../my/my',
+			success: (val) => {
+				console.log(val)
+			},
+			fail: (fail) => {
+				console.log(fail)
+			}
+		})
+	}
+```

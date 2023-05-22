@@ -2,6 +2,8 @@
 	<view :style="{height:height-statusHeight-titleHeight+'px'}" class="login">
 		<button type="primary" class="loginTrue" open-type="getPhoneNumber" @getphonenumber="getUserProfile">
 			登录</button>
+		<button type="default" class="loginTrue" @tap.stop="handleCancel">
+			暂不登录</button>
 	</view>
 </template>
 
@@ -27,6 +29,11 @@
 		// #endif
 	})
 	// #ifdef MP-WEIXIN
+	const handleCancel = () => {
+		uni.switchTab({
+			url: '../my/my'
+		})
+	}
 	const getUserProfile = (val) => {
 		uni.login({
 			success(res) {
@@ -38,10 +45,7 @@
 							key: 'token',
 							data: r.data.token,
 							success: () => {
-								uni.showToast({
-									title: '登录成功',
-									icon: 'none'
-								})
+
 								uni.navigateBack({
 									delta: 1
 								});
@@ -53,7 +57,11 @@
 							key: 'id',
 							data: r.data._id,
 							success: () => {
-								console.log('id已储存')
+								uni.showToast({
+									title: '登录成功',
+									icon: 'none',
+									duration: 1000
+								})
 							},
 							fail: (err) => {
 								console.log(err)

@@ -3,8 +3,13 @@
 		<view class="title">
 			{{article.title}}
 		</view>
+
 		<br>
-		<mp-html :selectable='true' :set-title='true' use-anchor :markdown='true' :content="article.content"></mp-html>
+		<mp-html class="rich" :selectable='true' :set-title='true' use-anchor :markdown='true'
+			:content="article.content"></mp-html>
+		<view class="news-tag">
+			标签：<uni-tag v-for="i in article.tags" size="small" :text="i.title" :key="i._id" :type="i.type"></uni-tag>
+		</view>
 		<!-- <image :src="article.pic" mode="aspectFit" class='image' scaleToFill width="100%"/> -->
 	</view>
 </template>
@@ -58,7 +63,22 @@
 </script>
 
 <style lang="scss">
-	 .article {
+	.rich {
+		padding: 5px;
+		/* 设置内边距 */
+		font-size: 18px;
+		/* 设置默认的字体大小 */
+		overflow: hidden;
+		/* 禁用横向滚动 */
+		display: inline;
+		/* 行内显示 */
+		white-space: pre-wrap;
+		/* 保留空格和换行符 */
+		white-space: pre-line;
+		/* 保留换行符 */
+	}
+
+	.article {
 		.title {
 			color: #2c3e50;
 			font-weight: 800;
@@ -68,14 +88,14 @@
 			margin-bottom: 60upx;
 		}
 
-		background-color: $uni-bg-color-grey;
-		padding: 20upx;
-		padding-top:40upx;
+		// background-color: $uni-bg-color-grey;
+		min-height: 100%;
+
 
 		.title {}
 	}
-		
-	.image{
+
+	.image {
 		max-width: 400rpx;
 	}
 </style>

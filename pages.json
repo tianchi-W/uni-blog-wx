@@ -27,7 +27,7 @@
 			"style": {
 				"navigationBarTitleText": "",
 				"enablePullDownRefresh": false,
-				"navigationBarBackgroundColor":"#7158e2"
+				"navigationBarBackgroundColor": "#16a085"
 
 			},
 			"usingComponents": {
@@ -48,8 +48,33 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "pages/classify/classify",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#16a085"
+			}
+
+		}, {
+			"path": "pages/hot/hot",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false,
+				"navigationBarBackgroundColor": "#16a085"
+			}
+
 		}
-	],
+	    ,{
+            "path" : "pages/aboutUs/aboutUs",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
@@ -60,19 +85,37 @@
 	},
 	"uniIdRouter": {},
 	"tabBar": {
-		"backgroundColor": "#ecf0f1",
+		"color": "#7A7E83",
+		"selectedColor": "#16a085",
+		"borderStyle": "black",
+		"height": "50px",
 		"fontSize": "10px",
+		"iconWidth": "18px",
+		"spacing": "10px",
+		"backgroundColor": "#ecf0f1",
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "首页",
-				"iconPath": "static/icon/a-03icon_home.png",
-				"selectedIconPath": "static/icon/a-03icon_home.png"
+				"iconPath": "static/icon/home_light (2).png",
+				"selectedIconPath": "static/icon/home_light.png"
 			},
+			{
+				"pagePath": "pages/classify/classify",
+				"text": "分类",
+				"iconPath": "static/icon/cascades (2).png",
+				"selectedIconPath": "static/icon/cascades.png"
+			},
+			// {
+			// 	"pagePath": "pages/hot/hot",
+			// 	"text": "精选",
+			// 	"iconPath": "static/icon/a-01icon_account.png",
+			// 	"selectedIconPath": "static/icon/a-01icon_account.png"
+			// },
 			{
 				"pagePath": "pages/my/my",
 				"text": "我的",
-				"iconPath": "static/icon/a-01icon_account.png",
-				"selectedIconPath": "static/icon/a-01icon_account.png"
+				"iconPath": "static/icon/my_light (2).png",
+				"selectedIconPath": "static/icon/my_light.png"
 			}
 		]
 	}

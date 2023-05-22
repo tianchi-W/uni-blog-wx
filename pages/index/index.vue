@@ -16,7 +16,7 @@
 		<scroll-view scroll-x scroll-with-animation class="tab-view" scroll-left="">
 			<view v-for="(item, index) in classify" :key="index"
 				:class="'tab-bar-item ' + (currentTab==index ? 'active' : '')" :data-current="index"
-				@tap.stop="swichNav(item,index)">
+				@tap.stop='swichNav(index,item)'>
 				<text class="tab-bar-title">{{item.title}}</text>
 			</view>
 			<view class="tab-bar-item">
@@ -80,7 +80,44 @@
 			</view>
 
 		</template>
+		<template v-else>
+			<view v-for="(item, index) in list" :key="index" class="news-block image-wide" :data-id="item._id"
+				@tap.stop="handlerArticleClick(item)">
+				<view class="news-image">
+					<image :src="item.pic" mode="aspectFit" />
+				</view>
 
+				<view class="news-text">
+					<text class="news-title">
+
+						{{item.title}}
+					</text>
+					<view class="news-intro">
+						{{item.introduction}}
+					</view>
+					<view class="news-tag">
+						<uni-tag v-for="i in item.tags" size="small" :text="i.title" :key="i._id"
+							:type="i.type"></uni-tag>
+					</view>
+					<view class="news-bottom">
+						<view class="news-date">
+							{{formatDateTime(item.date)}}
+						</view>
+						<view class="news-author">
+							{{item.author}}
+						</view>
+					</view>
+
+
+
+				</view>
+			</view>
+
+		</template>
+		<!--加载loadding-->
+		<uni-load-more iconType="circle" :status="status" />
+		<!-- <jiangqie-nomore :visible="!pullUpOnLast"></jiangqie-nomore> -->
+		<!--加载loadding-->
 	</view>
 
 
@@ -101,9 +138,9 @@
 </template>
 <script setup lang="ts">
 	import { formatDateTime } from '@/utils/formate.js'
-	import { getArticleList, getClassifyInfo } from "@/utils/api.js"
-	import { onReady, onReachBottom } from '@dcloudio/uni-app'
-	import { ref, reactive } from "vue"
+	import { useArticleList, useClassify } from '@/utils/hooks'
+	import { ref, reactive, watch } from "vue"
+	
 	const info = reactive([{
 		content: '内容 A',
 		imgUrl: 'https://cdn.cdnjson.com/tvax3.sinaimg.cn//large/0072Vf1pgy1fodqofmtxkj31kw0w04qv.jpg'
@@ -114,6 +151,7 @@
 		content: '内容 C',
 		imgUrl: 'https://cdn.cdnjson.com/tvax3.sinaimg.cn//large/a15b4afely1fnt9605xzwj21hc0u07ld.jpg'
 	}])
+
 	const dotStyle = reactive([{
 		backgroundColor: 'rgba(0, 0, 0, .3)',
 		border: '1px rgba(0, 0, 0, .3) solid',
@@ -143,52 +181,29 @@
 		current.value = event.detail.current
 		dotStyles.value = dotStyle[current.value]
 	}
-	const size = ref(5)
-	const list = ref([])
-	const total = ref()
-	const getList = () => {
+	const { classify, swichNav, currentInfo, currentTab } = useClassify()
 
-		getArticleList({ limit: size.value, skip: (current.value) * size.value }).then(r => {
-			total.value = r.data.total
-			list.value = [...list.value,...r.data.article]
-		})
-	}
-	getList()
+	const { list, handlerArticleClick, classifyid,status } = useArticleList()
+
 	const handlerSearchClick = (e : Event) => {
-		console.log(e)
 		uni.navigateTo({
 			url: '/pages/search/search'
 		});
 	}
-	onReady(() => {
-		// getList()
-		getClassify()
+	const handlerTabMoreClick = () => {
+		uni.switchTab({
+			url: '../classify/classify',
+			success: (val) => {
+				console.log(val)
+			},
+			fail: (fail) => {
+				console.log(fail)
+			}
+		})
+	}
+	watch(() => currentInfo.value?._id, (to) => {
+		classifyid.value = to
 	})
-	onReachBottom(() => {
-		current.value = current.value + 1
-		console.log(current.value)
-		if (total.value > list.value.length) {
-			getList()
-		}
-	})
-	// const searchValue = ref('')
-
-	//分类列表
-	const classify = ref()
-	const currentTab = ref(0)
-	const getClassify = async () => {
-		const res = await getClassifyInfo()
-		classify.value = [{ title: '首页', _id: '0' }, ...res.data.classify]
-	}
-	const swichNav = (item : any, index : any) => {
-		currentTab.value = index
-	}
-	const handlerArticleClick = (item : any) => {
-
-		uni.navigateTo({
-			url: '/pages/article/article?_id=' + item._id
-		});
-	}
 </script>
 
 <style lang="scss" scoped>
@@ -350,57 +365,56 @@
 				}
 			}
 
-			.news-block {
-				display: grid;
-				grid-template-columns: 270rpx 1fr;
-				border-bottom: 1rpx solid #DDD;
-				padding: 24rpx 0;
 
-				.news-text {
-					display: flex;
-					flex-direction: column;
-					flex: 1;
+		}
+	}
+
+	.news-block {
+		display: grid;
+		grid-template-columns: 270rpx 1fr;
+		border-bottom: 1rpx solid #DDD;
+		padding: 24rpx 0;
+
+		.news-text {
+			display: flex;
+			flex-direction: column;
+			flex: 1;
 
 
-					.news-title {
-						font-size: 40rpx;
-						font-weight: 700;
-					}
-
-					.news-intro {
-						margin-top: 10rpx;
-						flex: 1;
-						display: flex;
-						align-items: center;
-					}
-
-					.news-tag {
-						margin-bottom: 10rpx;
-					}
-
-					.news-bottom {
-						display: flex;
-						justify-content: space-between;
-					}
-				}
-
-				.news-image {
-
-					border-radius: 8rpx;
-
-					image {
-						width: 250rpx;
-						height: 250rpx;
-					}
-				}
-
-				&:last-child {
-					border: none;
-				}
+			.news-title {
+				font-size: 40rpx;
+				font-weight: 700;
 			}
 
+			.news-intro {
+				margin-top: 10rpx;
+				flex: 1;
+				display: flex;
+				align-items: center;
+			}
 
+			.news-tag {
+				margin-bottom: 10rpx;
+			}
 
+			.news-bottom {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
+
+		.news-image {
+
+			border-radius: 8rpx;
+
+			image {
+				width: 250rpx;
+				height: 250rpx;
+			}
+		}
+
+		&:last-child {
+			border: none;
 		}
 	}
 </style>
